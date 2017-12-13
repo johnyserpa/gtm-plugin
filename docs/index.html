@@ -68,6 +68,10 @@
 				<ul>
 					<li>JS</li>
 				</ul>
+				<h2 id="how-to-develop">How to develop</h2>
+				<ul>
+					<li><code>npm run build</code> triggers typescript compiler, rollup and docs generator.</li>
+				</ul>
 				<h2 id="how-to-use">How to use</h2>
 				<ul>
 					<li><p>If we are going to interact with the plugin in almost every page, plugin class should be instanciated once at the page load.</p>
@@ -85,6 +89,59 @@
   });
 </code></pre></li>
 				</ul>
+				<p>## </p>
+				<h1 id="google-tag-manager-integration">Google Tag Manager Integration</h1>
+				<p>Layer between website and GTM.</p>
+				<h2 id="getting-started">Getting Started</h2>
+				<p>These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.</p>
+				<h3 id="prerequisites">Prerequisites</h3>
+				<ul>
+					<li>nodejs</li>
+					<li>npm</li>
+				</ul>
+				<h3 id="installing">Installing</h3>
+				<ul>
+					<li>Clone the project</li>
+					<li><code>cd</code> into it and <code>npm i</code></li>
+				</ul>
+				<h3 id="break-down-into-end-to-end-tests">Break down into end to end tests</h3>
+				<p>Explain what these tests test and why</p>
+				<pre><code><span class="hljs-attribute">Give an example</span>
+</code></pre><h3 id="and-coding-style-tests">And coding style tests</h3>
+				<p>Explain what these tests test and why</p>
+				<pre><code><span class="hljs-attribute">Give an example</span>
+</code></pre><h2 id="deployment">Deployment</h2>
+				<pre><code>npm <span class="hljs-keyword">run</span><span class="bash"> build</span>
+</code></pre><p>This will:</p>
+				<ul>
+					<li>Transpile typescript to javascript</li>
+					<li></li>
+				</ul>
+				<p>Instanciate global var:</p>
+				<pre><code>```var gtmplugin = new LVGtmPlugin.GtmPlugin(window.dataLayer, <span class="hljs-string">"EUR"</span>);```
+</code></pre><h2 id="built-with">Built With</h2>
+				<ul>
+					<li><a href="http://www.dropwizard.io/1.0.2/docs/">Dropwizard</a> - The web framework used</li>
+					<li><a href="https://maven.apache.org/">Maven</a> - Dependency Management</li>
+					<li><a href="https://rometools.github.io/rome/">ROME</a> - Used to generate RSS Feeds</li>
+				</ul>
+				<h2 id="contributing">Contributing</h2>
+				<p>Please read <a href="https://gist.github.com/PurpleBooth/b24679402957c63ec426">CONTRIBUTING.md</a> for details on our code of conduct, and the process for submitting pull requests to us.</p>
+				<h2 id="versioning">Versioning</h2>
+				<p>We use <a href="http://semver.org/">SemVer</a> for versioning. For the versions available, see the <a href="https://github.com/your/project/tags">tags on this repository</a>. </p>
+				<h2 id="authors">Authors</h2>
+				<ul>
+					<li><strong>Billie Thompson</strong> - <em>Initial work</em> - <a href="https://github.com/PurpleBooth">PurpleBooth</a></li>
+				</ul>
+				<p>See also the list of <a href="https://github.com/your/project/contributors">contributors</a> who participated in this project.</p>
+				<h2 id="license">License</h2>
+				<p>This project is licensed under the MIT License - see the <a href="LICENSE.md">LICENSE.md</a> file for details</p>
+				<h2 id="acknowledgments">Acknowledgments</h2>
+				<ul>
+					<li>Hat tip to anyone who&#39;s code was used</li>
+					<li>Inspiration</li>
+					<li>etc</li>
+				</ul>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -94,10 +151,19 @@
 						<a href="globals.html"><em>Globals</em></a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_gtm_plugin_.html">"gtm-<wbr>plugin"</a>
+						<a href="modules/_gtm_helper_.html">"gtm-<wbr>helper"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_gtm_plugin_service_.html">"gtm-<wbr>plugin.service"</a>
+						<a href="modules/_gtm_product_clicks_.html">"gtm-<wbr>product-<wbr>clicks"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_gtm_product_detail_.html">"gtm-<wbr>product-<wbr>detail"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_gtm_product_impressions_and_clicks_.html">"gtm-<wbr>product-<wbr>impressions-<wbr>and-<wbr>clicks"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_gtm_wrapper_.html">"gtm-<wbr>wrapper"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_interfaces_checkout_interface_.html">"interfaces/checkout.interface"</a>
@@ -113,6 +179,12 @@
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_interfaces_transaction_interface_.html">"interfaces/transaction.interface"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_services_gtm_detail_service_.html">"services/gtm-<wbr>detail.service"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_services_gtm_impressions_and_clicks_service_.html">"services/gtm-<wbr>impressions-<wbr>and-<wbr>clicks.service"</a>
 					</li>
 				</ul>
 			</nav>

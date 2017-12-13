@@ -1,7 +1,10 @@
+import { GtmProductDetail } from './gtm-product-detail';
+import { GtmProductListings } from './gtm-product-impressions-and-clicks';
+
 /**
  * GTM Plugin
  */
-export class GtmPlugin {
+export class GtmWrapper {
 
     /**
      * Constructor method.
@@ -10,90 +13,43 @@ export class GtmPlugin {
      */
     constructor(private configs: GtmPluginConfigs) {
         if (!configs.dataLayer) throw new Error("dataLayer must be passed to constructor");
+
+        if (configs.impressionsAndClicks.status) this.triggerImpressionsAndClicks();
+        if (configs.detail.status) this.triggerDetail();
     }
 
     /**
-     * Method for product impression tracking.
-     * ---
-     * Tracks on every page.
-     * ---
-     * https://developers.google.com/tag-manager/enhanced-ecommerce#product-impressions
-     * 
-     * @param products
+     * Trigger impressions tracking.
+     * --
+     * TODO: config validations
      */
-    trackProductImpressions(products: ImpressionData[]) {
-        if (!products) return new Error("Products must be passed as parameter!");
-
-        this.configs.dataLayer.push({
-            //event: "productImpressions",
-            ecommerce: {
-                currencyCode: this.configs.currency,
-                impressions: products
-            }
-        });
-        return true;
+    triggerImpressionsAndClicks() {
+        try {
+            const trackImpressionsAndClicksClass = new GtmProductListings(this.configs);
+            trackImpressionsAndClicksClass.trackImpressions();
+            trackImpressionsAndClicksClass.trackClicks();
+        } catch (e) {
+            console.error(e);
+        }
     }
 
     /**
-     * Method for product click tracking.
-     * ---
-     * Tracks on event.
-     * ----
-     * https://developers.google.com/tag-manager/enhanced-ecommerce#product-clicks
-     * 
-     * @param list
-     * @param product
+     * Trigger detail tracking.
      */
-    trackProductClick(list: string, product: ProductData) {
-        if (!list) return new Error("List must be passed as argument!");
-        if (!product) return new Error("Product must be passed as argument!");
-
-        this.configs.dataLayer.push({
-            event: "productClick",
-            ecommerce: {
-                currencyCode: this.configs.currency,
-                click: {
-                    actionField: {
-                        list: list
-                    },
-                    products: [product]
-                }
-            }
-        });
-
-        return true;
-    }
-
-    /**
-     * Method to track product detail page.
-     * --- 
-     * Tracks on event.
-     * ---
-     * https://developers.google.com/tag-manager/enhanced-ecommerce#details
-     * 
-     * @param product 
-     */
-    trackProductDetail(product: ProductData) {
-        if (!product) return new Error("Product must be passed as argument!");
-
-        this.configs.dataLayer.push({
-            event: "productDetail",
-            ecommerce: {
-                currencyCode: this.configs.currency,
-                detail: {
-                    products: [product]
-                }
-            }
-        })
-
-        return true;
+    triggerDetail() {
+        try {
+            const trackDetailClass = new GtmProductDetail(this.configs);
+            trackDetailClass.trackDetails();
+        } catch (e) {
+            console.error(e);
+        }
     }
 
 
     /**
      * Method to track product added to cart.
      * ---
-     * Tracks on event.
+     * Tracks on event "addToCart".
      * ---
      * https://developers.google.com/tag-manager/enhanced-ecommerce#add
      * 
@@ -118,7 +74,7 @@ export class GtmPlugin {
     /**
      * Method to track product removed from cart.
      * ---
-     * Tracks on event.
+     * Tracks on event "removeFromCart".
      * ---
      * https://developers.google.com/tag-manager/enhanced-ecommerce#add
      * 
@@ -143,14 +99,14 @@ export class GtmPlugin {
     /**
      * Method to track checkout process.
      * ---
-     * Tracks on event.
+     * Tracks on event "checkout" OR "initiateCheckout".
      * ---
      * https://developers.google.com/tag-manager/enhanced-ecommerce#checkoutstep
      * 
      * @param step 
      * @param products 
      */
-    checkout(step: number, products: ProductData[]) {
+    trackCheckout(step: number, products: ProductData[]) {
         if (!step || isNaN(step)) return new Error("Step must be an int passed as argument!");
         if (!products) return new Error("Products must be passed as argument!");
         
@@ -176,10 +132,11 @@ export class GtmPlugin {
             let contentIds: string[] = [], price: number = 0, numItems:number = 0;
             products.forEach(function(p) {
               contentIds.push(p.id);
-              price += p.price;
+              price += +p.price;
               numItems += p.quantity;
             });
-
+            
+            gtmObj.event = "initiateCheckout"; // If first step, event is initiate checkout.
             gtmObj.ecommerce.checkout.products = products;
             gtmObj.productIds = contentIds;
             gtmObj.productCount = numItems;
@@ -194,7 +151,7 @@ export class GtmPlugin {
     /**
      * Method to track transaction.
      * ---
-     * Tracks on event.
+     * Tracks on event "transaction".
      * --- 
      * https://developers.google.com/tag-manager/enhanced-ecommerce#purchases
      * 
@@ -210,12 +167,13 @@ export class GtmPlugin {
 
         this.configs.dataLayer.push({
             event: "transaction",
-            ecommerce: {
+            /*ecommerce: {
                 purchase: {
                     actionField: transaction,
                     products: products
                 }
-            },
+            },*/
+            transactionId: transaction.id,
             productIds: contentIds,
             transactionRevenue: transaction.revenue
         });

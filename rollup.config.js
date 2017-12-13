@@ -2,9 +2,9 @@ import babel from 'rollup-plugin-babel';
 import sourcemaps from 'rollup-plugin-sourcemaps';
 
 export default {
-  input: 'dist/gtm-plugin.js',
+  input: 'dist/gtm-wrapper.js',
   output: {
-    file: 'dist/gtm-plugin-bundle.js',
+    file: 'dist/gtm-wrapper-bundle.js',
     format: 'iife',
     sourcemap: true,
     globals: {

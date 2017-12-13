@@ -23,8 +23,4 @@ interface Checkout {
     productIds?: string[];
     productSumPrices?: number;
     productCount?: number;
-
-    /**
-     * Product 
-     */
 }

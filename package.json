@@ -7,8 +7,8 @@
     "compile": "tsc",
     "test": "karma start",
     "bundle": "rollup -c",
-    "build": "npm run compile && npm run bundle && npm docs",
-    "docs": "./node_modules/typedoc/bin/typedoc --out docs ./src/ --name 'GTM LVEngine JS Plugin'"
+    "docs": "./node_modules/typedoc/bin/typedoc --out docs ./src/ --name 'GTM LVEngine JS Plugin'",
+    "build": "npm run compile && npm run bundle && npm run docs"
   },
   "author": "jserpa",
   "license": "ISC",
@@ -29,7 +29,5 @@
     "typedoc": "^0.9.0",
     "typescript": "^2.6.2"
   },
-  "dependencies": {
-    "jquery": "^3.2.1"
-  }
+  "dependencies": {}
 }

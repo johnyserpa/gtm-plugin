@@ -32,7 +32,7 @@ interface ProductData {
     /**
      * The price of a product (e.g. 29.20).
      */
-    price?: number;
+    price?: string;
 
     /**
      * The quantity of a product (e.g. 2).
@@ -48,5 +48,20 @@ interface ProductData {
      * The product's position in a list or collection (e.g. 2).
      */
     position?: number;
+
+    /**
+     * The product URL.
+     */
+    url?: string;
+
+    /**
+     * The product main image.
+     */
+    img?: string;
+
+    /**
+     * List associated.
+     */
+    list?: string;
 
 }

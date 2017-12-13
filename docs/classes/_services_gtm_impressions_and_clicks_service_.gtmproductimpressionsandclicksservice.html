@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Checkout | GTM LVEngine JS Plugin</title>
+	<title>GtmProductImpressionsAndClicksService | GTM LVEngine JS Plugin</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,13 +56,13 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_interfaces_checkout_interface_.html">&quot;interfaces/checkout.interface&quot;</a>
+					<a href="../modules/_services_gtm_impressions_and_clicks_service_.html">&quot;services/gtm-impressions-and-clicks.service&quot;</a>
 				</li>
 				<li>
-					<a href="_interfaces_checkout_interface_.checkout.html">Checkout</a>
+					<a href="_services_gtm_impressions_and_clicks_service_.gtmproductimpressionsandclicksservice.html">GtmProductImpressionsAndClicksService</a>
 				</li>
 			</ul>
-			<h1>Interface Checkout</h1>
+			<h1>Class GtmProductImpressionsAndClicksService</h1>
 		</div>
 	</div>
 </header>
@@ -73,7 +73,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">Checkout</span>
+						<span class="target">GtmProductImpressionsAndClicksService</span>
 					</li>
 				</ul>
 			</section>
@@ -81,109 +81,138 @@
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
-						<section class="tsd-index-section tsd-is-not-exported">
+						<section class="tsd-index-section ">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="_services_gtm_impressions_and_clicks_service_.gtmproductimpressionsandclicksservice.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section tsd-is-private tsd-is-private-protected">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="_interfaces_checkout_interface_.checkout.html#ecommerce" class="tsd-kind-icon">ecommerce</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="_interfaces_checkout_interface_.checkout.html#event" class="tsd-kind-icon">event</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="_interfaces_checkout_interface_.checkout.html#productcount" class="tsd-kind-icon">product<wbr>Count</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="_interfaces_checkout_interface_.checkout.html#productids" class="tsd-kind-icon">product<wbr>Ids</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="_interfaces_checkout_interface_.checkout.html#productsumprices" class="tsd-kind-icon">product<wbr>Sum<wbr>Prices</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_services_gtm_impressions_and_clicks_service_.gtmproductimpressionsandclicksservice.html#configs" class="tsd-kind-icon">configs</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_services_gtm_impressions_and_clicks_service_.gtmproductimpressionsandclicksservice.html#trackproductclick" class="tsd-kind-icon">track<wbr>Product<wbr>Click</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_services_gtm_impressions_and_clicks_service_.gtmproductimpressionsandclicksservice.html#trackproductimpressions" class="tsd-kind-icon">track<wbr>Product<wbr>Impressions</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
-				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-					<a name="ecommerce" class="tsd-anchor"></a>
-					<h3>ecommerce</h3>
-					<div class="tsd-signature tsd-kind-icon">ecommerce<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/johnyserpa/gtm-plugin/blob/8cdefce/src/interfaces/checkout.interface.ts#L10">interfaces/checkout.interface.ts:10</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Ecommerce object.</p>
-						</div>
-					</div>
-					<div class="tsd-type-declaration">
-						<h4>Type declaration</h4>
-						<ul class="tsd-parameters">
-							<li class="tsd-parameter">
-								<h5>checkout<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span></h5>
-								<ul class="tsd-parameters">
-									<li class="tsd-parameter">
-										<h5>action<wbr>Field<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span></h5>
-										<ul class="tsd-parameters">
-											<li class="tsd-parameter">
-												<h5>step<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
-											</li>
-										</ul>
-									</li>
-									<li class="tsd-parameter">
-										<h5><span class="tsd-flag ts-flagOptional">Optional</span> products<span class="tsd-signature-symbol">?: </span><a href="_interfaces_productdata_interface_.productdata.html" class="tsd-signature-type">ProductData</a><span class="tsd-signature-symbol">[]</span></h5>
-									</li>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Gtm<wbr>Product<wbr>Impressions<wbr>And<wbr>Clicks<wbr>Service<span class="tsd-signature-symbol">(</span>configs<span class="tsd-signature-symbol">: </span><a href="../interfaces/_interfaces_configs_interface_.gtmpluginconfigs.html" class="tsd-signature-type">GtmPluginConfigs</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_services_gtm_impressions_and_clicks_service_.gtmproductimpressionsandclicksservice.html" class="tsd-signature-type">GtmProductImpressionsAndClicksService</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in services/gtm-impressions-and-clicks.service.ts:1</li>
 								</ul>
-							</li>
-							<li class="tsd-parameter">
-								<h5>currency<wbr>Code<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
-							</li>
-						</ul>
-					</div>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>configs: <a href="../interfaces/_interfaces_configs_interface_.gtmpluginconfigs.html" class="tsd-signature-type">GtmPluginConfigs</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="_services_gtm_impressions_and_clicks_service_.gtmproductimpressionsandclicksservice.html" class="tsd-signature-type">GtmProductImpressionsAndClicksService</a></h4>
+						</li>
+					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-					<a name="event" class="tsd-anchor"></a>
-					<h3>event</h3>
-					<div class="tsd-signature tsd-kind-icon">event<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="configs" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> configs</h3>
+					<div class="tsd-signature tsd-kind-icon">configs<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_interfaces_configs_interface_.gtmpluginconfigs.html" class="tsd-signature-type">GtmPluginConfigs</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/johnyserpa/gtm-plugin/blob/8cdefce/src/interfaces/checkout.interface.ts#L5">interfaces/checkout.interface.ts:5</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Transaction ID.</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-					<a name="productcount" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> product<wbr>Count</h3>
-					<div class="tsd-signature tsd-kind-icon">product<wbr>Count<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/johnyserpa/gtm-plugin/blob/8cdefce/src/interfaces/checkout.interface.ts#L25">interfaces/checkout.interface.ts:25</a></li>
+							<li>Defined in services/gtm-impressions-and-clicks.service.ts:3</li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-					<a name="productids" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> product<wbr>Ids</h3>
-					<div class="tsd-signature tsd-kind-icon">product<wbr>Ids<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/johnyserpa/gtm-plugin/blob/8cdefce/src/interfaces/checkout.interface.ts#L23">interfaces/checkout.interface.ts:23</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Extra info for FB Pixel tag.</p>
-						</div>
-					</div>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="trackproductclick" class="tsd-anchor"></a>
+					<h3>track<wbr>Product<wbr>Click</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">track<wbr>Product<wbr>Click<span class="tsd-signature-symbol">(</span>list<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, product<span class="tsd-signature-symbol">: </span><a href="../interfaces/_interfaces_productdata_interface_.productdata.html" class="tsd-signature-type">ProductData</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">true</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Error</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in services/gtm-impressions-and-clicks.service.ts:37</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<h2 id="method-for-product-click-tracking-">Method for product click tracking.</h2>
+									<h2 id="tracks-on-event-productclick-">Tracks on event &quot;productClick&quot;.</h2>
+									<p><a href="https://developers.google.com/tag-manager/enhanced-ecommerce#product-clicks">https://developers.google.com/tag-manager/enhanced-ecommerce#product-clicks</a></p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>list: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>product: <a href="../interfaces/_interfaces_productdata_interface_.productdata.html" class="tsd-signature-type">ProductData</a></h5>
+									<div class="tsd-comment tsd-typography">
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">true</span>
+								<span class="tsd-signature-symbol"> | </span>
+								<span class="tsd-signature-type">Error</span>
+							</h4>
+						</li>
+					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-					<a name="productsumprices" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> product<wbr>Sum<wbr>Prices</h3>
-					<div class="tsd-signature tsd-kind-icon">product<wbr>Sum<wbr>Prices<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/johnyserpa/gtm-plugin/blob/8cdefce/src/interfaces/checkout.interface.ts#L24">interfaces/checkout.interface.ts:24</a></li>
-						</ul>
-					</aside>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="trackproductimpressions" class="tsd-anchor"></a>
+					<h3>track<wbr>Product<wbr>Impressions</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">track<wbr>Product<wbr>Impressions<span class="tsd-signature-symbol">(</span>products<span class="tsd-signature-symbol">: </span><a href="../interfaces/_interfaces_productdata_interface_.productdata.html" class="tsd-signature-type">ProductData</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in services/gtm-impressions-and-clicks.service.ts:14</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<h2 id="method-for-product-impression-tracking-">Method for product impression tracking.</h2>
+									<h2 id="tracks-on-event-productimpressions-">Tracks on event &quot;productImpressions&quot;.</h2>
+									<p><a href="https://developers.google.com/tag-manager/enhanced-ecommerce#product-impressions">https://developers.google.com/tag-manager/enhanced-ecommerce#product-impressions</a></p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>products: <a href="../interfaces/_interfaces_productdata_interface_.productdata.html" class="tsd-signature-type">ProductData</a><span class="tsd-signature-symbol">[]</span></h5>
+									<div class="tsd-comment tsd-typography">
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
 				</section>
 			</section>
 		</div>
@@ -208,7 +237,7 @@
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_gtm_wrapper_.html">"gtm-<wbr>wrapper"</a>
 					</li>
-					<li class="current tsd-kind-external-module">
+					<li class=" tsd-kind-external-module">
 						<a href="../modules/_interfaces_checkout_interface_.html">"interfaces/checkout.interface"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -226,7 +255,7 @@
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_services_gtm_detail_service_.html">"services/gtm-<wbr>detail.service"</a>
 					</li>
-					<li class=" tsd-kind-external-module">
+					<li class="current tsd-kind-external-module">
 						<a href="../modules/_services_gtm_impressions_and_clicks_service_.html">"services/gtm-<wbr>impressions-<wbr>and-<wbr>clicks.service"</a>
 					</li>
 				</ul>
@@ -235,23 +264,20 @@
 				<ul class="before-current">
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="_interfaces_checkout_interface_.checkout.html" class="tsd-kind-icon">Checkout</a>
+					<li class="current tsd-kind-class tsd-parent-kind-external-module">
+						<a href="_services_gtm_impressions_and_clicks_service_.gtmproductimpressionsandclicksservice.html" class="tsd-kind-icon">Gtm<wbr>Product<wbr>Impressions<wbr>And<wbr>Clicks<wbr>Service</a>
 						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-								<a href="_interfaces_checkout_interface_.checkout.html#ecommerce" class="tsd-kind-icon">ecommerce</a>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+								<a href="_services_gtm_impressions_and_clicks_service_.gtmproductimpressionsandclicksservice.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-								<a href="_interfaces_checkout_interface_.checkout.html#event" class="tsd-kind-icon">event</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="_services_gtm_impressions_and_clicks_service_.gtmproductimpressionsandclicksservice.html#configs" class="tsd-kind-icon">configs</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-								<a href="_interfaces_checkout_interface_.checkout.html#productcount" class="tsd-kind-icon">product<wbr>Count</a>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_services_gtm_impressions_and_clicks_service_.gtmproductimpressionsandclicksservice.html#trackproductclick" class="tsd-kind-icon">track<wbr>Product<wbr>Click</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-								<a href="_interfaces_checkout_interface_.checkout.html#productids" class="tsd-kind-icon">product<wbr>Ids</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-								<a href="_interfaces_checkout_interface_.checkout.html#productsumprices" class="tsd-kind-icon">product<wbr>Sum<wbr>Prices</a>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_services_gtm_impressions_and_clicks_service_.gtmproductimpressionsandclicksservice.html#trackproductimpressions" class="tsd-kind-icon">track<wbr>Product<wbr>Impressions</a>
 							</li>
 						</ul>
 					</li>
