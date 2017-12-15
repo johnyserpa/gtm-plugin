@@ -1,10 +1,21 @@
+import { GtmTransaction } from './gtm-transaction';
+import { GtmCheckout } from './gtm-checkout';
+import { GtmProductCart } from './gtm-product-cart';
 import { GtmProductDetail } from './gtm-product-detail';
 import { GtmProductListings } from './gtm-product-impressions-and-clicks';
 
 /**
- * GTM Plugin
+ * GTM Wrapper Class.
+ * 
+ * All starts here...
  */
 export class GtmWrapper {
+
+    /**
+     * Shared classes by functions.
+     */
+    private trackCartClass: GtmProductCart;
+    private trackImpressionsAndClicksClass: GtmProductListings;
 
     /**
      * Constructor method.
@@ -14,20 +25,32 @@ export class GtmWrapper {
     constructor(private configs: GtmPluginConfigs) {
         if (!configs.dataLayer) throw new Error("dataLayer must be passed to constructor");
 
-        if (configs.impressionsAndClicks.status) this.triggerImpressionsAndClicks();
-        if (configs.detail.status) this.triggerDetail();
+        /**
+         * Call methods that have status = true.
+         */
+        if (configs.impressionsAndClicks && configs.impressionsAndClicks.status) this.triggerImpressionsAndClicks();
+        if (configs.detail && configs.detail.status) this.triggerDetail();
+        if (configs.cart && configs.cart.status) this.triggerCart();
+        if (configs.checkout && configs.checkout.status) this.triggerCheckout();
+        if (configs.transaction && configs.transaction.status) this.triggerTransaction();
     }
 
     /**
      * Trigger impressions tracking.
-     * --
-     * TODO: config validations
      */
-    triggerImpressionsAndClicks() {
+    private triggerImpressionsAndClicks() {
         try {
-            const trackImpressionsAndClicksClass = new GtmProductListings(this.configs);
-            trackImpressionsAndClicksClass.trackImpressions();
-            trackImpressionsAndClicksClass.trackClicks();
+            this.trackImpressionsAndClicksClass = new GtmProductListings(this.configs);
+            this.trackImpressionsAndClicksClass.trackImpressions();
+            this.trackImpressionsAndClicksClass.trackClicks();
+        } catch (e) {
+            console.error(e);
+        }
+    }
+    public trackImpressionsAndClicksBySelector(cssWrapperSelector: string) {
+        try {
+            this.trackImpressionsAndClicksClass.trackImpressions(cssWrapperSelector);
+            this.trackImpressionsAndClicksClass.trackClicks(cssWrapperSelector);
         } catch (e) {
             console.error(e);
         }
@@ -36,7 +59,7 @@ export class GtmWrapper {
     /**
      * Trigger detail tracking.
      */
-    triggerDetail() {
+    private triggerDetail() {
         try {
             const trackDetailClass = new GtmProductDetail(this.configs);
             trackDetailClass.trackDetails();
@@ -45,143 +68,52 @@ export class GtmWrapper {
         }
     }
 
-
     /**
-     * Method to track product added to cart.
-     * ---
-     * Tracks on event "addToCart".
-     * ---
-     * https://developers.google.com/tag-manager/enhanced-ecommerce#add
-     * 
-     * @param product
+     * Trigger cart tracking.
      */
-    trackProductAddToCart(product: ProductData) {
-        if (!product) return new Error("Product must be passed as argument!");
-
-        this.configs.dataLayer.push({
-            event: "addToCart",
-            ecommerce: {
-                currencyCode: this.configs.currency,
-                add: {
-                    products: [product]
-                }
-            }
-        })
-
-        return true;
-    }
-
-    /**
-     * Method to track product removed from cart.
-     * ---
-     * Tracks on event "removeFromCart".
-     * ---
-     * https://developers.google.com/tag-manager/enhanced-ecommerce#add
-     * 
-     * @param product
-     */
-    trackProductRemoveFromCart(product: ProductData) {
-        if (!product) return new Error("Product must be passed as argument!");
-
-        this.configs.dataLayer.push({
-            event: "removeFromCart",
-            ecommerce: {
-                currencyCode: this.configs.currency,
-                remove: {
-                    products: [product]
-                }
-            }
-        })
-
-        return true;
-    }
-
-    /**
-     * Method to track checkout process.
-     * ---
-     * Tracks on event "checkout" OR "initiateCheckout".
-     * ---
-     * https://developers.google.com/tag-manager/enhanced-ecommerce#checkoutstep
-     * 
-     * @param step 
-     * @param products 
-     */
-    trackCheckout(step: number, products: ProductData[]) {
-        if (!step || isNaN(step)) return new Error("Step must be an int passed as argument!");
-        if (!products) return new Error("Products must be passed as argument!");
-        
-        /**
-         * Create gtm object to be pushed to dataLayer.
-         */
-        let gtmObj: Checkout = {
-            event: "checkout",
-            ecommerce: {
-                currencyCode: this.configs.currency,
-                checkout: {
-                    actionField: {
-                        step: step
-                    }
-                }
-            }
-        };
-
-        /**
-         * Only on step 1, all products must be passed.
-         */
-        if (step === 1) {
-            let contentIds: string[] = [], price: number = 0, numItems:number = 0;
-            products.forEach(function(p) {
-              contentIds.push(p.id);
-              price += +p.price;
-              numItems += p.quantity;
-            });
-            
-            gtmObj.event = "initiateCheckout"; // If first step, event is initiate checkout.
-            gtmObj.ecommerce.checkout.products = products;
-            gtmObj.productIds = contentIds;
-            gtmObj.productCount = numItems;
-            gtmObj.productSumPrices = price;
+    private triggerCart() {
+        try {
+            this.trackCartClass = new GtmProductCart(this.configs);
+        } catch (e) {
+            console.error(e);
         }
-
-        this.configs.dataLayer.push(gtmObj);
-
-        return true;
+    }
+    public addToCart(product: ProductData) {
+        try {
+            this.trackCartClass.addToCart(product);
+        } catch (e) {
+            console.error(e);
+        }
+    }
+    public removeFromCart(product: ProductData) {
+        try {
+            this.trackCartClass.removeFromCart(product);
+        } catch (e) {
+            console.error(e);
+        }
     }
 
     /**
-     * Method to track transaction.
-     * ---
-     * Tracks on event "transaction".
-     * --- 
-     * https://developers.google.com/tag-manager/enhanced-ecommerce#purchases
-     * 
-     * @param products
+     * Trigger checkout tracking.
      */
-    trackPurchase(transaction: any, products: ProductData[]) {
-        if (!transaction) return new Error("Transaction must be passed as argument!");
-        if (!products) return new Error("Products must be passed as argument!");
-
-        let contentIds = products.map((p) => {
-            return p.id;
-        });
-
-        this.configs.dataLayer.push({
-            event: "transaction",
-            /*ecommerce: {
-                purchase: {
-                    actionField: transaction,
-                    products: products
-                }
-            },*/
-            transactionId: transaction.id,
-            productIds: contentIds,
-            transactionRevenue: transaction.revenue
-        });
-
-        return true;
+    private triggerCheckout() {
+        try {
+            const trackCheckoutClass = new GtmCheckout(this.configs);
+            trackCheckoutClass.trackCheckout();
+        } catch (e) {
+            console.error(e);
+        }
     }
-
     
-
-
+    /**
+     * Trigger transaction tracking.
+     */
+    private triggerTransaction() {
+        try {
+            const trackTransactionClass = new GtmTransaction(this.configs);
+            trackTransactionClass.trackTransaction();
+        } catch (e) {
+            console.error(e);
+        }
+    }
 }

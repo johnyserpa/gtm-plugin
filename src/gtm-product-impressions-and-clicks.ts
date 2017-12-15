@@ -1,32 +1,13 @@
 import { GtmProductImpressionsAndClicksService } from './services/gtm-impressions-and-clicks.service';
 import { GtmHelper } from './gtm-helper';
 
+
 /**
  * Class to scrap HTML listings and product impression data and return to wrapper method.
  * 
  * This class will search for the list selector, iterate all divs with the product selector report them to service.
  * 
  * This class will also search for all links in products divs in listings and add a click event listender to report the procuct clicked to service.
- * 
- * Required for impression tracking:
- * 
- *      .list-selector
- *          data:
- *              - name
- *      .product-selector
- *          data:
- *              - id
- *              - name
- *              - brand
- *              - category
- *              - price
- *              - position
- * 
- * Required for click tracking:
- * 
- *      .product-div-selector
- *      .product-info-selector
- *      .product-link-selector
  */
 export class GtmProductListings {
     /**
@@ -50,28 +31,55 @@ export class GtmProductListings {
 
     /**
      * Add click event listener to products.
+     * 
+     * @param cssWrapperSelecto optional
      */
-    trackClicks() {
+    trackClicks(cssWrapperSelector?: string) {
         /**
          * Find all lists in document.
          */
-        let lists = document.querySelectorAll(this.configs.impressionsAndClicks.listSelector);
+        let lists: NodeListOf<Element>;
+        if (cssWrapperSelector) lists = document.querySelectorAll(cssWrapperSelector + " " + this.configs.impressionsAndClicks.listSelector);
+        else lists = document.querySelectorAll(this.configs.impressionsAndClicks.listSelector);
+
+        this.helper.log("Tracking clicks...");
+        this.helper.log(cssWrapperSelector ? "CssWrapperSelector: " + cssWrapperSelector + "..." : "No cssWrapperSelector...");
+        this.helper.log("Found " + lists.length + " lists...");
+
         /**
-         * Iterate all lists in document.
+         * Iterate all lists in found.
          */
         lists.forEach((list: HTMLElement, i) => {
             /**
              * Find all products in this list.
              */
-            let products: NodeListOf<Element> = list.querySelectorAll(this.configs.impressionsAndClicks.productDivSelector);
+            let products: NodeListOf<Element> = list.querySelectorAll(this.configs.impressionsAndClicks.productContainerSelector);
+            this.helper.log("Found " + products.length + " products with selector " + this.configs.impressionsAndClicks.productContainerSelector + "...");
             /**
              * Iterate all products in this list.
              */
             products.forEach((product: HTMLElement, prodIndex) => {
+                /**
+                 * Find all links in product.
+                 */
                 let links: NodeListOf<Element> = product.querySelectorAll(this.configs.impressionsAndClicks.productLinkSelector);
+                this.helper.log("Found " + links.length + " links...");
+                /**
+                 * Get node with gtm info.
+                 */
                 let info: Element = product.querySelector(this.configs.impressionsAndClicks.productInfoSelector);
+                /**
+                 * Iterate all links in product.
+                 */
                 links.forEach((link: HTMLElement, i) => {
+                    this.helper.log("Adding event lstener to link...");
+                    /**
+                     * Add click event listener.
+                     */
                     link.addEventListener('click', () => {
+                        /**
+                         * Call service when clicked.
+                         */
                         this.service.trackProductClick(list.dataset.name, {
                             id: (info as HTMLElement).dataset.ref,
                             name: (info as HTMLElement).dataset.name,
@@ -87,13 +95,15 @@ export class GtmProductListings {
     }
 
     /**
-     * Init method, to be called by wrapper method.
+     * Impressions method, to report impressions data to service.
+     * 
+     * @param cssWrapperSelecto optional
      */
-    trackImpressions(): boolean | null {
+    trackImpressions(cssWrapperSelector?: string): boolean | null {
         /**
          * Check if there are listings in page.
          */
-        let listings = this.getListingElements();
+        let listings: NodeListOf<Element> = this.getListingElements(cssWrapperSelector);
         if (listings.length <= 0) {
             this.helper.log("No listings in page..");
             return null;
@@ -126,8 +136,11 @@ export class GtmProductListings {
      * 
      * @return false if none OR number of listings.
      */
-    getListingElements(): NodeListOf<Element> {
-        let listings: NodeListOf<Element> = document.querySelectorAll(this.configs.impressionsAndClicks.listSelector);
+    getListingElements(selector?: string): NodeListOf<Element> {
+        let listings: NodeListOf<Element>;
+        if (selector) listings = document.querySelectorAll(selector + " " + this.configs.impressionsAndClicks.listSelector);
+        else listings = document.querySelectorAll(this.configs.impressionsAndClicks.listSelector);
+        this.helper.log("Getting list elements by selector: " +  this.configs.impressionsAndClicks.listSelector + " : Found ->", listings);
         return listings;
     }
 
@@ -149,17 +162,18 @@ export class GtmProductListings {
             /**
              * If List has no name, abort.
              */
-            if (!list.dataset.name) return console.error("List " + list + " without name..");
+            if (!list.dataset.name) throw new Error("List " + list + " without name..");
 
             /**
              * Create a temporary object to hold products data.
              */
             let products = list.querySelectorAll(this.configs.impressionsAndClicks.productInfoSelector);
             this.helper.log("List " + i + " | Found " + products.length + " products.");
+
             /**
              * If list has no products, abort.
              */
-            if (!products) return new Error("List " + list + " without products..");
+            if (!products) throw new Error("List " + list + " without products..");
 
             /**
              * Iterate all products and add to temp object.

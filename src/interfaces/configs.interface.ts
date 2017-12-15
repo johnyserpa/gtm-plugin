@@ -23,6 +23,18 @@ interface GtmPluginConfigs {
      * Product Detail configurations.
      */
     detail: ProductDetailConfigs;
+    /**
+     * Add and Remove from Cart configurations.
+     */
+    cart: AddAndRemoveFromCartConfigs;
+    /**
+     * Checkout configurations.
+     */
+    checkout: CheckoutConfigs;
+    /**
+     * Transaction configurations.
+     */
+    transaction: TransactionConfigs;
 }
 
 /**
@@ -30,12 +42,25 @@ interface GtmPluginConfigs {
  */
 interface ImpressionsAndClicksConfigs {
     /**
-     * About product impressions.
+     * Status.
      */
     status: boolean;
+    /**
+     * The list css selector.
+     */
     listSelector: string;
-    productDivSelector: string;
+
+    /**
+     * Product container css selector.
+     */
+    productContainerSelector: string;
+    /**
+     * Product links css selector.
+     */
     productLinkSelector: string;
+    /**
+     * Product information css selector.
+     */
     productInfoSelector: string;
 }
 
@@ -43,14 +68,62 @@ interface ImpressionsAndClicksConfigs {
  * Product Detail configs.
  */
 interface ProductDetailConfigs {
+    /**
+     * Status.
+     */
     status: boolean;
-    detailPageDiv: string;
-    productDetailInfo: string;
+    /**
+     * Detail page identifier css selector.
+     */
+    detailPageSelector: string;
+    /**
+     * Product information css selector.
+     */
+    productInfoSelector: string;
 }
 
 /**
  * Add to and remove from cart configs. 
  */
 interface AddAndRemoveFromCartConfigs {
+    /**
+     * Status.
+     */
     status: boolean;
+}
+
+/**
+ * Checkout configs.
+ */
+interface CheckoutConfigs {
+    /**
+     * Status.
+     */
+    status: boolean;
+    /**
+     * Initiate checkout css selector.
+     */
+    checkoutInitiateSelector: string;
+    /**
+     * Checkout step css selector.
+     */
+    checkoutStepSelector: string;
+    /**
+     * Product information css selector.
+     */
+    productInfoSelector: string;
+}
+
+/**
+ * Transaction configs.
+ */
+interface TransactionConfigs {
+    /**
+     * Status.
+     */
+    status: boolean;
+    /**
+     * Transaction info css selector.
+     */
+    transactionInfoSelector: string;
 }
