@@ -9,7 +9,7 @@
     "bundle": "rollup -c",
     "docs": "./node_modules/typedoc/bin/typedoc --out docs ./src/ --name 'Ecommerce GTM Wrapper'",
     "build": "npm run compile && npm run bundle && npm run minify && npm run docs",
-    "minify": "./node_modules/uglify-js/bin/uglifyjs dist/gtm-wrapper-bundle.js --output dist/gtm-wrapper-bundle.min.js --source-map \"filename='dist/gtm-wrapper-bundle.js.map',url='gtm-wrapper-bundle.js.map',content='dist/gtm-wrapper-bundle.js.map'\""
+    "minify": "./node_modules/uglify-js/bin/uglifyjs dist/v1/gtm-wrapper-bundle.js --output dist/v1/gtm-wrapper-bundle.min.js --source-map \"filename='dist/v1/gtm-wrapper-bundle.js.map',url='gtm-wrapper-bundle.js.map',content='dist/v1/gtm-wrapper-bundle.js.map'\""
   },
   "author": "jserpa",
   "license": "ISC",

@@ -80,6 +80,10 @@ interface ProductDetailConfigs {
      * Product information css selector.
      */
     productInfoSelector: string;
+    /**
+     * Extra data to scrap from div with data.
+     */
+    extra: string[];
 }
 
 /**

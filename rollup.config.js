@@ -2,18 +2,17 @@ import babel from 'rollup-plugin-babel';
 import sourcemaps from 'rollup-plugin-sourcemaps';
 
 export default {
-  input: 'dist/gtm-wrapper.js',
+  input: 'dist/v1/gtm-wrapper.js',
   output: {
-    file: 'dist/gtm-wrapper-bundle.js',
+    file: 'dist/v1/gtm-wrapper-bundle.js',
     format: 'iife',
     sourcemap: true,
     globals: {
       jquery: 'jQuery'
     }
   },
-  moduleName: "LVGtmPlugin",
+  name: "GtmWrapper",
   external: [
-    'jquery'
   ],
   plugins: [
     babel({

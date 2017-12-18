@@ -81,7 +81,7 @@ export class GtmProductListings {
                          * Call service when clicked.
                          */
                         this.service.trackProductClick(list.dataset.name, {
-                            id: (info as HTMLElement).dataset.ref,
+                            id: (info as HTMLElement).dataset.id,
                             name: (info as HTMLElement).dataset.name,
                             brand: (info as HTMLElement).dataset.brand,
                             category: (info as HTMLElement).dataset.category,
@@ -180,7 +180,7 @@ export class GtmProductListings {
              */
             products.forEach((product: HTMLElement, i) => {
                 listingsMounted.push({
-                    id: product.dataset.ref,
+                    id: product.dataset.id,
                     name: product.dataset.name,
                     brand: product.dataset.brand,
                     category: product.dataset.category,

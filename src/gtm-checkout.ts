@@ -89,7 +89,7 @@ export class GtmCheckout {
          */
         productNodes.forEach((product: HTMLElement, i) => {
             products.push({
-                id: product.dataset.ref,
+                id: product.dataset.id,
                 name: product.dataset.name,
                 brand: product.dataset.brand,
                 category: product.dataset.category,

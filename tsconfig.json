@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "rootDir": "src",
-    "outDir": "dist",
+    "outDir": "dist/v1",
     "target": "es2015",
     "module": "es2015",
     "moduleResolution": "node",

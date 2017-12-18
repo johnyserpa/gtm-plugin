@@ -66,13 +66,21 @@ export class GtmProductDetail {
         /**
          * Reporting product detail data to service.
          */
-        this.service.trackProductDetail({
-            id: (detailInfo as HTMLElement).dataset.ref,
+        let trackObject: any = {
+            id: (detailInfo as HTMLElement).dataset.id,
             name: (detailInfo as HTMLElement).dataset.name,
             brand: (detailInfo as HTMLElement).dataset.brand,
             category: (detailInfo as HTMLElement).dataset.category,
             price: this.helper.formatPrice((detailInfo as HTMLElement).dataset.price)
-        });
+        };
+
+        if (this.configs.detail.extra) {
+            this.configs.detail.extra.forEach((el, i) => {
+                trackObject[el] = (detailInfo as HTMLElement).dataset[el];
+            });
+        }
+
+        this.service.trackProductDetail(trackObject);
 
         return true;
     }

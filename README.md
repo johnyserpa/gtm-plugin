@@ -2,35 +2,192 @@
 
 E-commerce GTM Wrapper focused on minimal configuration and out of the box tracking.
 
-**Events**:
-* Impressions and clicks - auto-tracking
-* Detail view - auto-tracking
-* Add and remove from cart - tracking by method
-* Initiate checkout and checkout steps - auto tracking
-* Transaction - auto tracking
+## Events and Data Layer exposed variables
 
-### Understanding HTML structure
+Events must be created as triggers in GTM.
 
-#### Listing
+### Impressions and clicks
 
-![Listing HTML Structure](https://preview.ibb.co/dY6RKm/listing.png)
+#### Data: 
 
-#### Detail
+* listSelector:
+    * name
+* productInfoSelector:
+    * id
+    * name
+    * price
+    * brand
+    * category
+
+#### Impressions
+* Event: **productImpressions** - auto-tracking
+* dataLayer:
+
+        currencyCode: string,
+        impressions: ProductData[]
+
+#### Clicks 
+* Event: **productClick** - auto-tracking
+* dataLayer:
+
+        currencyCode: string,
+        click: {
+            actionField: {
+                list: string
+            },
+            products: ProductData[]
+        }
+
+### Detail view
+
+#### Data
+
+* productInfoSelector:
+    * id
+    * name
+    * price
+    * brand
+    * category
+
+#### Detail 
+* Event: **productDetail** - auto-tracking
+* dataLayer:
+
+        currencyCode: string,
+        click: {
+            products: ProductData[]
+        },
+        productInfo: ProductData
+
+* You can add extra data to be scrapped from the div dataset by using the extra field.
+    * select extra data fields by passing a string array
+
+### Add and remove from cart
+
+#### Data
+
+* addToCart/removeFromCart
+    * id
+    * name
+    * price
+    * brand
+    * category
+    * variant
+    * quantity
+
+#### Add to cart
+* Event: **addToCart** - tracking by method
+* dataLayer: 
+
+        ecommerce: {
+            currencyCode: string,
+            add: {
+                products: ProductData[]
+            }
+        },
+        productInfo: ProductData
+
+#### Remove from cart
+* Event: **removeFromCart** tracking by method
+* dataLayer:
+
+        ecommerce: {
+            currencyCode: string,
+            remove: {
+                products: ProductData[]
+            }
+        },
+        productInfo: ProductData
+
+### Iniitiate checkout and checkout steps
+
+#### Data
+
+* checkoutStepSelector:
+    * step
+* productInfoSelector:
+    * id
+    * name
+    * price
+    * brand
+    * category
+    * variant
+    * quantity
+
+#### Initiate Checkout
+* Event: **initiateCheckout** - auto-tracking
+* dataLayer:
+
+        ecommerce: {
+            currencyCode: string,
+            checkout: {
+                actionField: {
+                    step: number
+                },
+                products: ProductData[]
+            },
+            productIds: number[],
+            productCount: number,
+            productSumPrices: number
+        }
+
+#### Checkout steps
+* Event: **checkout** - auto-tracking
+* dataLayer:
+
+        ecommerce: {
+            currencyCode: string,
+            checkout: {
+                actionField: {
+                    step: number
+                }
+            }
+        }
+
+### Transaction
+
+#### Data
+* transactionInfoSelector:
+    * id
+    * revenue
+    * tax
+    * shipping
+    * products[]:
+        * id
+        * name
+        * price
+        * brand
+        * category
+        * variant
+        * quantity
+
+* Event: **transaction** - auto tracking
+* dataLayer:
+
+        transaction: transactionData,
+        products: productData[]
+
+## HTML structure
+
+### Listing
+
+![Listing HTML Structure](https://preview.ibb.co/gwb7s6/Screenshot_from_2017_12_15_15_30_42.png" alt="Screenshot from 2017 12 15 15 30 42)
+
+### Detail
 
 ![Detail HTML Structure](https://image.ibb.co/giVWkR/detail.png)
 
-#### Cart
+### Cart
 
 ![Cart HTML Structure](https://image.ibb.co/bT6RKm/cart.png)
 
-#### Checkout
+### Checkout
 
 ![Checkout HTML Structure](https://image.ibb.co/hEnBkR/checkout.png)
 
-#### Transaction
+### Transaction
 
 ![Transaction HTML Structure](https://image.ibb.co/eQoHQR/transaction.png)
-
 
 ## Getting Started
 
@@ -40,6 +197,8 @@ E-commerce GTM Wrapper focused on minimal configuration and out of the box track
 
 ### Prerequisites
 
+* Google Analytics Enhanced Ecommerce
+* Google Tag Manager
 * nodejs
 * npm
 * typescript
@@ -71,6 +230,7 @@ Examples:
             status: true,
             detailPageSelector: "#gtm-detail",
             productInfoSelector: "#gtm-detail-product-info",
+            extra: ["stock", "something"]
         },
         cart: {
             status: true
@@ -127,7 +287,7 @@ Feel free to contribute :)
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+Trying to use [SemVer](http://semver.org/) for versioning. 
 
 ## Authors
 

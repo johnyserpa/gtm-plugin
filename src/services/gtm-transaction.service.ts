@@ -29,7 +29,7 @@ export class GtmTransactionService {
      * 
      * @param products
      */
-    trackPurchase(transaction: any, products: ProductData[]) {
+    trackPurchase(transaction: TransactionData, products: ProductData[]) {
         /**
          * Arguments must be passed.
          */
