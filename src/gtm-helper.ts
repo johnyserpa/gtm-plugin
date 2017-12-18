@@ -30,10 +30,10 @@ export class GtmHelper {
      * @param num 
      */
     formatPrice(num: string) {
-        console.log("Format price", num);
+        this.log("Format price", num);
         num = num.replace('€', '').replace(',', '.').trim();
         num = parseFloat((Math.round(+num * 100) / 100).toString()).toFixed(2);
-        console.log("Format price", num);
+        this.log("Format price", num);
         return num;
     }
 
